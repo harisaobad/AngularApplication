@@ -1,0 +1,61 @@
+<div class="container" style="margin-top: 20px; margin-bottom: 30px;">
+    <!-- <div class="row">
+        <div class="col-lg-12">
+        </div>
+    </div> -->
+    <button type="button" class="btn btn-outline-primary" (click)="showData=!showData">
+        {{ showData == true ? "Hide" : "Show" }}
+    </button>
+
+    <table class="table table-bordered" *ngIf="showData">
+        <thead>
+            <th width="20.50px">Naziv</th>
+            <th width="20.50px">Autor</th>
+            <th width="20.50px">Zanr</th>
+            <th width="20.50px">Opis</th>
+            <th width="20.50px">Slika</th>
+            <th width="20.50px">Cijena</th>
+            <th width="20.50px">Datum Izdavanja</th>
+            <th width="20.50px">Jezik</th>
+            <th width="20.50px">Broj stranica</th>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let lista  of lista">
+                <td>{{lista.naziv }}</td>
+                <td>{{lista.autor }}</td>
+                <td>{{lista.zanr }}</td>
+                <td>
+                    <p *ngIf="lista.vidjeti">{{lista.opis }}</p>
+                    <button type="button" class="btn btn-outline-primary" (click)="toggleDescriptionBook(lista.id)">
+                        {{ lista.vidjeti ? "Hide" : "Show" }}
+                    </button>
+                </td>
+                <td>
+
+                    <button type="button" class="btn btn-outline-primary" (click)="showImage=!showImage">{{ showImage ==
+                        true ? "Hide" : "Show" }}</button>
+                    <p *ngIf="showImage">
+                        <img [src]="lista.slika" />
+                        <img *ngIf="lista.slika==''" src="assets/noimage.jpg" style="width: 150px; height:150px" />
+                    </p>
+
+
+                </td>
+                <td [style] *ngIf="lista.cijena > 20" class="colorRed">{{lista.cijena | currency:
+                    'EUR':'symbol-narrow': '1.2-2' }}</td>
+                <td [style] *ngIf="lista.cijena < 20" class="colorGreen">{{lista.cijena | number:'1.2-2' |
+                    currency: 'EUR'}}</td>
+                <td>{{lista.datumIzdavanja | date:'yyyy' }}</td>
+                <td>{{lista.jezik | uppercase }}</td>
+                <td [style] *ngIf="lista.brojStranica >200" class="colorOrange">
+                    {{lista.brojStranica }}
+                </td>
+
+                <td [style] *ngIf="lista.brojStranica >100 && lista.brojStranica <200 " class="colorBlue">
+                    {{lista.brojStranica }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
